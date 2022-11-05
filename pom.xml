@@ -22,6 +22,10 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
+        <!-- Plugins and build properties-->
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <spring-banner-plugin.version>1.5.0</spring-banner-plugin.version>
+
         <!-- Standalone dependencies -->
         <h2.version>2.0.202</h2.version>
         <flyway.version>8.2.2</flyway.version>
@@ -111,6 +115,24 @@
                             </configuration>
                         </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>ch.acanda.maven</groupId>
+                    <artifactId>spring-banner-plugin</artifactId>
+                    <version>${spring-banner-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>generate-spring-banner</id>
+                            <phase>generate-resources</phase>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <text>${project.artifactId}</text>
+                        <info>Version: ${project.version} BuildTime: ${maven.build.timestamp}</info>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
